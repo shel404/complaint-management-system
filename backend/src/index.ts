@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes";
 import ticketRoutes from "./routes/ticket.routes";
+import { initializeDatabase } from "./utils/dbInit";
 
 dotenv.config();
 
@@ -14,6 +15,9 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/tickets", ticketRoutes);
 
-app.listen(port, () => {
-  console.log(`[server]: Server is running at port ${port}`);
+// Initialize database and start server
+initializeDatabase().then(() => {
+  app.listen(port, () => {
+    console.log(`[server]: Server is running at port ${port}`);
+  });
 });
