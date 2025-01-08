@@ -18,6 +18,7 @@ model User {
   name            String
   email           String   @unique
   password        String
+  salt            String
   role            Role
   customerTickets Ticket[] @relation("CustomerTickets")
   adminTickets    Ticket[] @relation("AdminTickets")
